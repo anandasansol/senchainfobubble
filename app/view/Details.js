@@ -6,7 +6,7 @@ Ext.define('mapinfobuble.view.Details', {
         scrollable: true,
         
         tpl: [
-        '<div class="desc">{description}</div>'
+        '<div class="desc">Details: {description}</div>'
         ].join(''),
         
         items:[{

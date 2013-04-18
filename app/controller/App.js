@@ -104,7 +104,7 @@ Ext.define('mapinfobuble.controller.App',{
                             type:'slide'
                         });
                                                                      
-                        me.getDetails().setData(ib.record.places.get('description'));
+                        me.getDetails().setData(ib.record.places.data);
                     });
                 });
             }(rec, marker));
