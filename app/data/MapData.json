@@ -1,0 +1,24 @@
+
+{
+    "status": "OK",
+    "places": [
+    {
+        "description": "Paris, France",
+        "name": "Paris",
+        "latitude": 46.00,
+        "longitude": 2.00
+    },
+    {
+        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+        "name": "India",
+        "latitude": 46.25,
+        "longitude": 2.00
+    },
+    {
+        "description": "Ahun, France",
+        "name": "India",
+        "latitude": 46.35,
+        "longitude": 2.10
+    }
+    ]
+}
