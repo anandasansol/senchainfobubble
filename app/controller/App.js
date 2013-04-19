@@ -1,5 +1,4 @@
-
-Ext.define('mapinfobuble.controller.App',{
+Ext.define('mapinfobuble.controller.App', {
     extend:'Ext.app.Controller',
     config:{
         refs:{
@@ -9,6 +8,7 @@ Ext.define('mapinfobuble.controller.App',{
             details: 'details',
             main: 'main',
             
+            // Button
             backToMap: 'button[name="backBtnToMap"]'
         },
         
@@ -17,13 +17,12 @@ Ext.define('mapinfobuble.controller.App',{
                 maprender: function(thisOb, map, eOpts) {
                     var me = this;
                     me.map = map;
-                    Ext.Function.defer(me.loadMarker, 2000, me);
+                    Ext.Function.defer(me.loadMarker, 500, me);
                 }
             },
             
             backToMap: {
                 tap: function() {
-                    console.log(';)');
                     this.getMain().animateActiveItem(this.getInfoMap(), {
                         type:'slide',
                         direction: 'right'
@@ -35,12 +34,13 @@ Ext.define('mapinfobuble.controller.App',{
     
     launch: function() {
         Ext.getStore('Places').load();
-        console.log('Places Store data = ', Ext.getStore('Places'));
     },
     
+    /*
+     * Function responsible for all the marker and infobubble handling
+     **/
+    
     loadMarker: function() {
-        console.log('Hello');
-        
         var me = this,
         latlngbounds = new google.maps.LatLngBounds(),
         position, marker,
@@ -53,7 +53,8 @@ Ext.define('mapinfobuble.controller.App',{
         });
         
         store.each(function(rec) {
-            position = new google.maps.LatLng(rec.get('latitude'), rec.get('longitude'));
+            position = new google.maps.LatLng(rec.get('latitude'), 
+                rec.get('longitude'));
                     
             marker = new google.maps.Marker({
                 position : position,
@@ -61,52 +62,54 @@ Ext.define('mapinfobuble.controller.App',{
                 data : rec
             });        
                     
-            // Showing InfoBubble        
+            /*
+             * Showing InfoBubble   
+             **/
             (function(data, selfMarker) {
-                google.maps.event.addListener(selfMarker, 'mousedown', function(event) {
-                    console.log('Marker tapped..., Go to event details', data.get('name'));
+                google.maps.event.addListener(selfMarker, 'mousedown', 
+                    function(event) {
+                        ib.record = {
+                            places : data																
+                        };
                     
-                    ib.record = {
-                        places : data																
-                    };
-                    
-                    ib.setContent([
-                        '<div class="infobox">' , 
-                        '<div class="content">',
-                        data.get('description'),
-                        '</div>',
-                        '</div>'
-                        ].join(''));
+                        ib.setContent([
+                            '<div class="infobox">' , 
+                            '<div class="content">',
+                            data.get('description'),
+                            '</div>',
+                            '<img src="resources/images/arrow.png">',
+                            '</div>'
+                            ].join(''));
                         
-                    /*
+                        /*
                      * center the map on the marker position
                      **/
-                    map.setCenter(selfMarker.position);
+                        map.setCenter(selfMarker.position);
                     
-                    ib.open(map, this);
-                    //                    me.activeInfoWindow = ib;
+                        ib.open(map, this);
                     
-                    google.maps.event.addListener(map, 'mousedown', function(){
-                        ib.close();
-                    });
+                        google.maps.event.addListener(map, 'mousedown', 
+                            function(){
+                                ib.close();
+                            });
                     
-                    /*
+                        /*
                      * Tap on InfoBubble handled here
                      **/
-                    google.maps.event.addDomListener(ib.bubble_, 'click', function(e){
-                        console.log('Bubbled tapped, record = ', ib.record);
-                        if(!me.getDetails()){
-                            me.getMain().add({
-                                xtype:'details'
-                            });
-                        }
-                        me.getMain().animateActiveItem(me.getDetails(), {
-                            type:'slide'
-                        });
+                        google.maps.event.addDomListener(ib.bubble_, 'click', 
+                            function(e){
+                                if(!me.getDetails()){
+                                    me.getMain().add({
+                                        xtype:'details'
+                                    });
+                                }
+                                me.getMain().animateActiveItem(me.getDetails(),{
+                                    type:'slide'
+                                });
                                                                      
-                        me.getDetails().setData(ib.record.places.data);
+                                me.getDetails().setData(ib.record.places.data);
+                            });
                     });
-                });
             }(rec, marker));
                         
             latlngbounds.extend(position);

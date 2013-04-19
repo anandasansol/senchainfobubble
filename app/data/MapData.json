@@ -3,20 +3,20 @@
     "status": "OK",
     "places": [
     {
-        "description": "Paris, France",
+        "description": "I love Paris.",
         "name": "Paris",
         "latitude": 46.00,
         "longitude": 2.00
     },
     {
-        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+        "description": "India Shining.",
         "name": "India",
         "latitude": 46.25,
         "longitude": 2.00
     },
     {
-        "description": "Ahun, France",
-        "name": "India",
+        "description": "Ohio is in USA.",
+        "name": "Ohio",
         "latitude": 46.35,
         "longitude": 2.10
     }

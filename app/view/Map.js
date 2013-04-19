@@ -10,15 +10,7 @@ Ext.define("mapinfobuble.view.Map",{
             title: 'Map with InfoBubble'
         },{
             xtype: 'map',
-            name : 'infoMap',
-            cls : "my-map",
-            listeners: {
-                maprender : function(comp, map){
-                    this.map = map;
-                    console.log('Rendering..');
-                }
-            }  
+            name : 'infoMap'
         }]
-       
     }
 });
