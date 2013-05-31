@@ -3,7 +3,6 @@ Ext.define('mapinfobuble.store.Places', {
     config : {
         model : 'mapinfobuble.model.Place',
         proxy: {
-            
             type: 'ajax',
             url: 'app/data/MapData.json',
             reader: {
